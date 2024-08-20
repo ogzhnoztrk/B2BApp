@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\B2BApp.Core\B2BApp.Core.csproj" />
     <ProjectReference Include="..\B2BApp.DTOs\B2BApp.DTOs.csproj" />
     <ProjectReference Include="..\B2BApp.Entities\B2BApp.Entities.csproj" />
     <ProjectReference Include="..\B2BApp.Models\B2BApp.Models.csproj" />

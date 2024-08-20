@@ -2,10 +2,13 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using B2BApp.Business.DependecyResolvers.Autofac;
 using B2BApp.Core.Utilities.Helpers.Security;
+using B2BApp.Core.Utilities.Helpers.Security.Hashing;
+using BenchmarkDotNet.Extensions;
 using Core.Models.Concrete.DbSettingsModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Security.Cryptography;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +55,25 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(o =>
 {
+
+    o.Events = new JwtBearerEvents { 
+        OnMessageReceived = context =>
+        {
+            var token = context.Request.Headers["Authorization"].ToString();
+            if (!token.IsEmpty())
+            {
+                if (token.StartsWith("Bearer"))
+                {
+                    token = token.Substring(7);
+
+                }
+                context.Token = token;
+                context.Token = HashingHelper.DecryptToken(token);
+            }
+            return Task.CompletedTask;
+        }
+    };
+
     o.TokenValidationParameters = new TokenValidationParameters
     {
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
@@ -122,3 +144,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

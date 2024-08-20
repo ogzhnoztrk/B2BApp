@@ -134,7 +134,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             data: {
                 'ilkTarih': tarih1,
@@ -319,7 +319,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
 
         }).done(function (response) {
@@ -459,7 +459,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             }
         }).done(function (response) {
             console.log(response.data);
@@ -510,7 +510,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             }
         }).done(function (response) {
             console.log(response.data);

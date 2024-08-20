@@ -136,7 +136,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             
         }).done(function (response) {
@@ -243,7 +243,7 @@
                     method: 'delete',
                     headers: {
                         'accept': 'text/plain',
-                        'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                        'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
                     }
                 }).done(function (response) {
                     if (response != null || data != null) {
@@ -282,7 +282,7 @@
             method: 'post',
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             contentType: 'application/json',
             data: JSON.stringify({
@@ -320,7 +320,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             }
         }).done(function (response) {
 
@@ -400,7 +400,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             data: {
                 'siparisId': id
@@ -433,7 +433,7 @@
             method: 'put',
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             contentType: 'application/json',
             data: JSON.stringify({

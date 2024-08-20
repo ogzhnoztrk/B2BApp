@@ -1,5 +1,6 @@
 ﻿
 
+using B2BApp.Core.Utilities.Helpers.Security.Hashing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json.Linq;
@@ -16,7 +17,9 @@ namespace B2BApp.Web.Core.Controllers
             if (Request.Cookies["jwt"] != null)
             {
                 var handler = new JwtSecurityTokenHandler();
-                var jsonToken = handler.ReadToken(Request.Cookies["jwt"]) as JwtSecurityToken;
+                var cryptedToken = Request!.Cookies["jwt"]!.ToString();
+                
+                var jsonToken = handler.ReadToken(HashingHelper.DecryptToken(cryptedToken!.ToString())) as JwtSecurityToken;
 
                 // Claims JSON olarak okuma
                 var claimsJson = new JObject();
@@ -27,7 +30,7 @@ namespace B2BApp.Web.Core.Controllers
 
                 ViewBag.FirmaId = claimsJson["role"].ToString();
                 ViewBag.KullanıcıAdi = claimsJson["unique_name"].ToString();
-                ViewBag.JwtCookie = Request.Cookies["jwt"];
+                ViewBag.JwtCookie = Request.Cookies["jwt"].ToString();
             }
 
 

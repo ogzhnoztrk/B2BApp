@@ -1,4 +1,5 @@
-﻿using B2BApp.Models;
+﻿using B2BApp.Core.Utilities.Helpers.Security.Hashing;
+using B2BApp.Models;
 using B2BApp.Web.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -18,8 +19,8 @@ namespace B2BApp.Web.Controllers
             if (Request.Cookies["jwt"] != null)
             {
                 var handler = new JwtSecurityTokenHandler();
-                var jsonToken = (handler.ReadToken(Request.Cookies["jwt"]) as JwtSecurityToken);
-                var exp = jsonToken.Claims.First(q => q.Type.Equals("exp")).Value;
+                var jsonToken = (handler.ReadToken(HashingHelper.DecryptToken(Request.Cookies["jwt"]!)) as JwtSecurityToken);
+                var exp = jsonToken!.Claims.First(q => q.Type.Equals("exp")).Value;
                 var ticks = long.Parse(exp);
                 var tokenDate = DateTimeOffset.FromUnixTimeSeconds(ticks).UtcDateTime;
                 var now = DateTime.Now.ToUniversalTime();
@@ -71,7 +72,7 @@ namespace B2BApp.Web.Controllers
                     HttpOnly = true, // Cookie'ye JavaScript erişimini engeller
                     Secure = true,   // Sadece HTTPS üzerinden iletilir
                     SameSite = SameSiteMode.Strict, // CSRF saldırılarını önlemek için güçlendirilmiş güvenlik
-                    Expires = DateTime.UtcNow.AddHours(6) // Cookie'nin son kullanma tarihi 
+                    Expires = DateTime.UtcNow.AddHours(6) // Cookie'nin son kullanma tarihi  
 
                 });
                 return RedirectToAction("login");

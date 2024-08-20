@@ -75,7 +75,7 @@
                 crossDomain: true,
                 headers: {
                     'accept': 'text/plain',
-                    'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                    'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
                 }
 
             },
@@ -123,7 +123,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             data: {
                 'id': data
@@ -150,7 +150,7 @@
             method: 'put',
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             contentType: 'application/json',
             // data: '{\n  "id": "6673db08b965b70719edb1fb",\n  "firmaAdi": "string"\n}',
@@ -194,7 +194,7 @@
                     method: 'delete',
                     headers: {
                         'accept': 'text/plain',
-                        'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                        'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
                     }
                 }).done(function (response) {
                     console.log(response);
@@ -248,7 +248,7 @@
                     method: 'post',
                     headers: {
                         'accept': 'text/plain',
-                        'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                        'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
                     },
                     contentType: 'application/json',
                     data: JSON.stringify({

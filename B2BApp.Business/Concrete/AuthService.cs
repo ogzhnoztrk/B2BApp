@@ -4,12 +4,14 @@ using B2BApp.Core.Utilities.Helpers.Security.Hashing;
 using B2BApp.DataAccess.Abstract;
 using B2BApp.DTOs;
 using B2BApp.Entities.Concrete;
+using Castle.Core.Configuration;
 using Core.Models.Concrete;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace B2BApp.Business.Concrete
@@ -77,16 +79,19 @@ namespace B2BApp.Business.Concrete
         {
             var generateToken = GenerateAccessToken(kullanici.KullaniciAdi, kullanici.TedarikciId);
             var token = new JwtSecurityTokenHandler().WriteToken(generateToken);
-            return new Result<string>(200, "Giris Başarılı", token, DateTime.Now);
+            var encryptedToken = HashingHelper.EncryptToken(token);
+            return new Result<string>(200, "Giris Başarılı", encryptedToken, DateTime.Now);
         }
 
 
 
         #region
+
         // Generating token based on user information
         private JwtSecurityToken GenerateAccessToken(string kullaniciAdi, string tedarikciId)
         {
-            // Create user claims
+
+                // Create user claims
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, kullaniciAdi),
@@ -118,8 +123,6 @@ namespace B2BApp.Business.Concrete
 
             return token as JwtSecurityToken;
         }
-
-
 
 
         /// <summary>

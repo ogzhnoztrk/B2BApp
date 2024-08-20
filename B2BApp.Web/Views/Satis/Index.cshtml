@@ -155,7 +155,7 @@
 
                 'type': 'GET',
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + "@ViewBag.JwtCookie");
+                    request.setRequestHeader('Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)");
                 }
             },
             "layout": {
@@ -226,7 +226,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             }
         }).done(function (response) {
             result = $.map(response.data, function (data) {
@@ -249,7 +249,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             }
         }).done(function (response) {
             result = $.map(response.data, function (data) {
@@ -282,7 +282,7 @@
             method: 'post',
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             contentType: 'application/json',
             // data: '{\n  "id": "string",\n  "subeId": "string",\n  "urunId": "string",\n  "satisMiktari": 0,\n  "satisTarihi": "2024-06-25T08:55:04.216Z",\n  "toplam": 0\n}',
@@ -332,7 +332,7 @@
                     method: 'delete',
                     headers: {
                         'accept': 'text/plain',
-                        'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                        'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
                     }
                 }).done(function (response) {
                     console.log(response);
@@ -362,7 +362,7 @@
             crossDomain: true,
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             data: {
                 'id': data
@@ -375,7 +375,7 @@
                 crossDomain: true,
                 headers: {
                     'accept': 'text/plain',
-                    'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                    'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
                 }
             }).done(function (response) {
                 result = $.map(response.data, function (data) {
@@ -400,7 +400,7 @@
                 crossDomain: true,
                 headers: {
                     'accept': 'text/plain',
-                    'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                    'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
 
                 }
             }).done(function (response) {
@@ -453,7 +453,7 @@
             method: 'put',
             headers: {
                 'accept': 'text/plain',
-                'Authorization': "Bearer " + "@ViewBag.JwtCookie"
+                'Authorization': "Bearer " + "@Html.Raw(ViewBag.JwtCookie)"
             },
             contentType: 'application/json',
             data: JSON.stringify({
